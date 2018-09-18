@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 const properties = {
   "flex-direction": {
@@ -168,12 +169,12 @@ export default class FlexPropertiesContainer extends Component {
   }
   render() {
     return (
-      <div className="FlexPropertiesContainer">
-        <div className="ParentFlexPropertie">
-          <h4 className="FlexPropertiesContainer-title">
+      <View style={styles.FlexPropertiesContainer}>
+        <View style={styles.ParentFlexPropertie}>
+          <Text className="FlexPropertiesContainer-title">
             父Flex属性 - Flex容器
-          </h4>
-          <div className="propeties">
+          </Text>
+          <View style={styles.properties}>
             <Property
               handleProperty={this.handleProperty.bind(this)}
               property={properties["flex-direction"]}
@@ -199,16 +200,16 @@ export default class FlexPropertiesContainer extends Component {
               property={properties["align-content"]}
               propertyTitle="alignContent"
             />
-          </div>
-          <div />
-        </div>
-        <div className="ChildrenFlexProperties">
-          <h4 className="FlexPropertiesContainer-title">
+          </View>
+          <View />
+        </View>
+        <View style={styles.ChildrenFlexProperties}>
+          <Text style={styles.FlexPropertiesContainerTitle}>
             子Flex属性 - Flex 元素
-          </h4>
-          <div className="ChildrenFlexProperties-properties">
-            <span>弹性子元素有6个属性：</span>
-            <ul>
+          </Text>
+          <View style={styles.ChildrenFlexPropertiesProperties}>
+            <Text>弹性子元素有6个属性：</Text>
+            {/* <ul>
               <li>order: integer</li>
               <li>flex-grow: integer 默认 0</li>
               <li>flex-shrink: integer 默认 1</li>
@@ -218,13 +219,13 @@ export default class FlexPropertiesContainer extends Component {
                 align-self : auto | flex-start | flex-end | center | baseline |
                 stretch
               </li>
-            </ul>
-            <span>
+            </ul> */}
+            <Text>
               可以在右侧demo中，为每个item来设置每个属性的值，来查看每个属性值对布局的影响
-            </span>
-          </div>
-        </div>
-      </div>
+            </Text>
+          </View>
+        </View>
+      </View>
     );
   }
 }
@@ -236,14 +237,14 @@ class Property extends Component {
 
   render() {
     return (
-      <div className="Property">
-        <label className="Property-title" title={this.props.property.title}>
+      <View style={styles.Property}>
+        <Text style={styles.PropertyTitle} title={this.props.property.title}>
           {this.props.propertyTitle}
-        </label>
+        </Text>
         {this.props.property.value.map(item => {
           return (
-            <div className="Property-item" key={item.id}>
-              <input
+            <View className="Property-item" key={item.id}>
+              {/* <input
                 type="radio"
                 name={this.props.propertyTitle}
                 id={item.id}
@@ -254,8 +255,8 @@ class Property extends Component {
                   })
                 }
               />
-              <label title={item.title}>{item.id}</label>
-            </div>
+              <label title={item.title}>{item.id}</label> */}
+            </View>
           );
         })}
 
@@ -298,82 +299,77 @@ class Property extends Component {
             column-reverse
           </label>
         </div> */}
-      </div>
+      </View>
     );
   }
 }
 
-
-
-// .FlexPropertiesContainer {
-//   flex: 1;
-//   display: flex;
-//   flex-direction: column;
-//   width: 50%;
-// }
-// .ParentFlexPropertie {
-//   flex: 1;
-//   border-top-width: 0px;
-//   border-bottom-width: 0;
-//   border-left-width: 0;
-//   border-right-width: 1px;
-//   border-style: solid;
-//   border-color: #fed45b;
-//   padding: 16px;
-// }
-// .ChildrenFlexProperties {
-//   flex: 1;
-//   border-top-width: 1px;
-//   border-bottom-width: 0;
-//   border-left-width: 0;
-//   border-right-width: 1px;
-//   border-style: solid;
-//   border-color: #fed45b;
-//   padding: 16px;
-// }
-// .FlexPropertiesContainer-title {
-//   text-align: left;
-// }
-
-// .propeties {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: flex-start;
-// }
-// .Property {
-//   display: flex;
-//   flex-direction: column;
-//   padding: 8px;
-//   background-color: white;
-//   border-radius: 10px;
-//   margin-left: 6px;
-// }
-// .Property-title {
-//   text-align: left;
-//   padding-bottom: 8px;
-//   font-weight: 800;
-//   border: 1px solid #419bf9;
-//   border-top-width: 0;
-//   border-left-width: 0;
-//   border-right-width: 0;
-//   color: #0f4c75;
-// }
-
-// .Property-item {
-//   margin-top: 8px;
-//   display: flex;
-//   flex-direction: row;
-// }
-
-// .ChildrenFlexProperties-properties {
-//   text-align: left;
-// }
-
-// input + label {
-//   margin-left: 4px;
-// }
-
-// input:checked + label {
-//   color: #419bf9;
-//   font-weight: 800;
-// }
+const styles = StyleSheet.create({
+  FlexPropertiesContainer: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    width: "50%"
+  },
+  ParentFlexPropertie: {
+    flex: 1,
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 1,
+    borderStyle: "solid",
+    borderColor: "#fed45b",
+    padding: 16
+  },
+  ChildrenFlexProperties: {
+    flex: 1,
+    borderTopWidth: 1,
+    borderBottomWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 1,
+    borderStyle: "solid",
+    borderColor: "#fed45b",
+    padding: 16
+  },
+  FlexPropertiesContainerTitle: {
+    textAlign: "left"
+  },
+  propeties: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start"
+  },
+  Property: {
+    display: "flex",
+    flexDirection: "column",
+    padding: 8,
+    backgroundColor: "white",
+    borderRadius: 10,
+    marginLeft: 6
+  },
+  PropertyTitle: {
+    textAlign: "left",
+    paddingBottom: 8,
+    // fontWeight: 800,
+    // border: "1px solid #419bf9",
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    color: "#0f4c75"
+  },
+  PropertyItem: {
+    marginTop: 8,
+    display: "flex",
+    flexDirection: "row"
+  },
+  ChildrenFlexPropertiesProperties: {
+    textAlign: "left"
+  }
+  // input + label {
+  //   margin-left: 4px,
+  // },
+  // input:checked + label {
+  //   color: #419bf9,
+  //   font-weight: 800,
+  // }
+});

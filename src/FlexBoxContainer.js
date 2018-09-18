@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import FlexPropertiesContainer from "./FlexPropertiesContainer";
 import FlexBoxDemo from "./FlexBoxDemo";
 
@@ -17,22 +17,23 @@ export default class FlexBoxContainer extends Component {
   }
   render() {
     return (
-      <View className="FlexBoxContainer">
-        <Text>测试啦啦啦</Text>
-        {/* <FlexPropertiesContainer
+      <View className="FlexBoxContainer" style={styles.FlexBoxContainer}>
+        <FlexPropertiesContainer
           handleProperties={this.handleProperties.bind(this)}
-        /> */}
+        />
         {/* <FlexBoxDemo properties={this.state.properties} /> */}
       </View>
     );
   }
 }
 
-// .FlexBoxContainer {
-//   background-color: beige;
-//   display: flex;
-//   flex: 1;
-//   width: 100%;
-//   flex-direction: row;
-//   justify-content: center;
-// }
+const styles = StyleSheet.create({
+  FlexBoxContainer: {
+    backgroundColor: "beige",
+    display: "flex",
+    flex: 1,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center"
+  }
+});
