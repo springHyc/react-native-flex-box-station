@@ -1,21 +1,32 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Linking
+} from "react-native";
 // import "./App.css";
 import FlexBoxContainer from "./FlexBoxContainer";
 
 class App extends Component {
+  open = () => {
+    const url = "https://github.com/springHyc/FlexBoxDemoStation";
+    Linking.openURL(url);
+  };
   render() {
     return (
       <View style={styles.App}>
         <View style={styles["App-header"]}>
           <Text style={styles["App-title"]}>FlexBox 演示站</Text>
-          <Text>
-            如果你觉得这个FlexBox 演示站对你有所帮助，请点击
-            <Text href="https://github.com/springHyc/FlexBoxDemoStation">
-              链接
-            </Text>
-            ，给我个star，非常感谢！
-          </Text>
+          <TouchableWithoutFeedback onPress={this.open}>
+            <View style={styles["App-content"]}>
+              <Text style={styles["content"]}>
+                如果你觉得这个FlexBox
+                演示站对你有所帮助，请点击[链接]，给我个star，非常感谢！
+              </Text>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
         <FlexBoxContainer />
       </View>
@@ -27,20 +38,32 @@ export default App;
 
 const styles = StyleSheet.create({
   App: {
-    textAlign: "center"
+    textAlign: "center",
+    height: "100%"
   },
 
   ["App-header"]: {
-    // backgroundColor: "#222",
+    backgroundColor: "#393e46",
     padding: 20,
-    color: "white"
+    height: "20%"
   },
 
   ["App-title"]: {
-    fontSize: 15
+    fontSize: 15,
+    textAlign: "center",
+    marginTop: 16,
+    marginBottom: 16,
+    color: "white"
   },
 
   ["App-intro"]: {
     fontSize: 20
+  },
+  ["App-content"]: {
+    flexDirection: "row",
+    flexWrap: "wrap"
+  },
+  content: {
+    color: "white"
   }
 });
