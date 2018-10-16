@@ -10,7 +10,7 @@ import {
 import { CheckBox, Button } from "react-native-elements";
 
 const properties = {
-  "flex-direction": {
+  flexDirection: {
     title: "flex-direction属性决定主轴的方向(即子元素的排列方向)",
     value: [
       {
@@ -35,7 +35,7 @@ const properties = {
       }
     ]
   },
-  "justify-content": {
+  justifyContent: {
     title: "justify-content属性定义了项目在主轴上的对齐方式",
     value: [
       {
@@ -66,7 +66,7 @@ const properties = {
       }
     ]
   },
-  "align-items": {
+  alignItems: {
     title: "align-items属性定义项目在交叉轴上如何对齐",
     value: [
       {
@@ -96,7 +96,7 @@ const properties = {
       }
     ]
   },
-  "flex-wrap": {
+  flexWrap: {
     title:
       '默认情况下，项目都排在一条线（又称"轴线"）上。flex-wrap属性定义，如果一条轴线排不下，如何换行，以及它的换行方式。',
     value: [
@@ -117,7 +117,7 @@ const properties = {
       }
     ]
   },
-  "align-content": {
+  alignContent: {
     title:
       " align-content属性用于修改flex-wrap属性的行为。类似于align-item,但它不是设置弹性元素的对齐，而是设置各个行的对齐。如果弹性元素只有一行，该属性不起作用。",
     value: [
@@ -159,12 +159,33 @@ export default class FlexPropertiesContainer2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: false
+      checked: false,
+      propertyTitles: null,
+      properties: {
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        alignItems: "stretch",
+        flexWrap: "nowrap",
+        alignContent: "stretch"
+      }
     };
   }
 
+  componentDidMount() {
+    this.props.handleProperties(this.state.properties); // 向它的父组件传递
+  }
+
+  handleProperty(property) {
+    if (this.state.properties) {
+      const properties = this.state.properties;
+      const newProperties = { ...properties, ...property };
+      this.setState({ properties: newProperties });
+      this.props.handleProperties(newProperties); // 向它的父组件传递
+    }
+  }
+
   show(key) {
-    this.setState({ properties: properties[key] });
+    this.setState({ propertyTitles: properties[key], flexProperty: key });
   }
   render() {
     const keys = Object.keys(properties);
@@ -176,7 +197,7 @@ export default class FlexPropertiesContainer2 extends Component {
         <View style={styles.properties}>
           <View style={styles.keys}>
             {keys.map(item => {
-              return (
+              return this.state.flexProperty === item ? (
                 <Button
                   title={item}
                   containerViewStyle={{
@@ -185,22 +206,39 @@ export default class FlexPropertiesContainer2 extends Component {
                   borderRadius={8}
                   backgroundColor={"#00adb5"}
                   onPress={() => this.show(item)}
-                  rightIcon={{ name: "right" }}
+                  rightIcon={{ name: "arrow-forward" }}
+                />
+              ) : (
+                <Button
+                  title={item}
+                  containerViewStyle={{
+                    marginBottom: 8
+                  }}
+                  borderRadius={8}
+                  backgroundColor={"#00adb5"}
+                  onPress={() => this.show(item)}
                 />
               );
             })}
           </View>
           <ScrollView style={styles.keys}>
-            {this.state.properties &&
-              this.state.properties.value.map(item => {
+            {this.state.propertyTitles &&
+              this.state.propertyTitles.value.map(item => {
                 return (
                   <CheckBox
                     title={item.id}
-                    checked={this.state.checked}
+                    checked={
+                      this.state.properties[this.state.flexProperty] === item.id
+                    }
                     raised
                     icon={{ name: "cached" }}
                     onPress={() => {
-                      this.setState({ checked: !this.state.checked });
+                      if (!!!this.state[item.id]) {
+                        this.handleProperty({
+                          [this.state.flexProperty]: item.id
+                        });
+                      } else {
+                      }
                     }}
                   />
                 );

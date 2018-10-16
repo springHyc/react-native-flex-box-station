@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   Linking
 } from "react-native";
-// import "./App.css";
+
 import FlexBoxContainer from "./FlexBoxContainer";
 
 class App extends Component {
