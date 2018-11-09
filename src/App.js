@@ -24,7 +24,7 @@ class App extends Component {
             <View style={styles["App-content"]}>
               <Text style={styles["content"]}>
                 如果你觉得这个FlexBox
-                演示站对你有所帮助，请点击[链接]，给我个star，非常感谢！!!
+                演示站对你有所帮助，请点击[链接]，给我个star，非常感谢!
               </Text>
             </View>
           </TouchableWithoutFeedback>
