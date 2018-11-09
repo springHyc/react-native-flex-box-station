@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Linking
 } from "react-native";
+import codePush from "react-native-code-push";
 
 import FlexBoxContainer from "./FlexBoxContainer";
 
@@ -34,7 +35,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default codePush(App);
 
 const styles = StyleSheet.create({
   App: {
