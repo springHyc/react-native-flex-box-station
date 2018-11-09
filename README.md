@@ -372,3 +372,8 @@ CodePush 是微软提供的一套用于 React Native 和 Cordova 应用的热更
 最后，一个很好的消息是，在 18 年 6 月份，React 工程经理 Sophie Alpert 在其官方博客上宣布 Facebook 将要重构 React Native，使其更轻量，更具灵活性，更适应 JavaScript 生态圈的发展。
 
 ## 7. 展示一下最新做的简易 APP
+
+APP 安装成功后，手机上暂时会出现这样的界面
+![](./images/react-native-app-1.png)
+
+这时候我们需要去“设置-通用-设备管理-开发者应用”中去添加信任即可。
