@@ -17,18 +17,22 @@ export default class FlexBoxDemo2 extends Component {
   componentWillMount() {
     // this.setStyles();
   }
+  renderItems() {
+    const nodes = [];
+    for (let i = 1; i <= this.props.len; i++) {
+      nodes.push(
+        <View style={styles.item}>
+          <Text>{i}</Text>
+        </View>
+      );
+    }
+    return nodes;
+  }
   render() {
+    debugger;
     return (
-      <View style={styles.flexBoxDemoContainer}>
-        <View style={styles.item}>
-          <Text>1</Text>
-        </View>
-        <View style={styles.item}>
-          <Text>2</Text>
-        </View>
-        <View style={styles.item}>
-          <Text>3</Text>
-        </View>
+      <View style={[styles.flexBoxDemoContainer, this.props.properties]}>
+        {this.renderItems()}
       </View>
     );
   }
